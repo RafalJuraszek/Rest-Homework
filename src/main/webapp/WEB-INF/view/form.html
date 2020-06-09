@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <title>Weather Forecast</title>
+
+    <style>
+        td {
+            text-align: center;
+            padding: 10px;
+        }
+
+        th {
+            padding: 10px;
+        }
+
+        span {
+            padding: 10px;
+        }
+        body {
+            background-color: lightblue;
+        }
+
+
+    </style>
+
+</head>
+
+
+<body>
+
+<h1>Insert Data</h1>
+
+
+<form action="#" th:action="@{/getResults}" th:object="${form}"
+      method="post">
+
+
+            <fieldset>
+                <h2>Forecast data (max 16 days): </h2>
+                <hr/>
+                Number of days:
+
+
+                <input name="number" type="number" th:value="*{number}"/>
+                <table>
+                    <thead>
+                    <tr>
+                        <th> City</th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="city, itemStat : *{cities}">
+                        <td><input th:field="*{cities[__${itemStat.index}__].city}"/></td>
+
+                    </tr>
+
+                    </tbody>
+                </table>
+                <hr/>
+                <h2>Historical Data: </h2>
+                <hr/>
+                City:
+                <input type="text" name="currCity">
+                <label for="start">Start date:</label>
+
+
+                <input type="date" id="start" name="startDate">
+                <label for="end">End date:</label>
+                <input type="date" id="end" name="endDate">
+                <input type="submit" id="submitButton" th:value="GET">
+
+
+            </fieldset>
+
+
+</form>
+
+
+</body>
+
+</html>

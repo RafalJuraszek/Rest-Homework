@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Results</title>
+
+
+    <style>
+        td {
+            text-align: center;
+            padding: 10px;
+        }
+
+        th {
+            padding: 10px;
+        }
+
+        span {
+            padding: 10px;
+        }
+
+        body {
+            background-color: lightblue;
+
+        }
+    </style>
+</head>
+<body>
+
+<H1>FORECAST RESULTS</H1>
+<H3>MAX TEMPERATURE IN </H3>
+<span th:text="${maxCity}"/>: <span th:text="${max}">MAX</span>
+<H3>MIN TEMPERATURE IN </H3>
+<span th:text="${minCity}"/>: <span th:text="${min}">MIN</span>
+<H3>MAX AMPLITUDE </H3>
+<span th:text="${amplitude}"/>
+
+<table>
+    <thead>
+    <tr>
+        <th> City</th>
+        <th> Average temperature</th>
+        <th> Max temperature</th>
+        <th> Min temperature</th>
+        <th>Daily Temperatures</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="sample : ${data}">
+        <td><span th:text="${sample.city}">City</span><br/></td>
+        <td><span th:text="${sample.temperature}">Temperature</span><br/></td>
+        <td><span th:text="${sample.max}">Max</span><br/></td>
+        <td><span th:text="${sample.min}">Min</span><br/></td>
+        <td>
+            <ul>
+                <li th:each="day,itemStat  : ${sample.temperatures}">
+                    <span style="color:blue;font-weight:bold" th:text="${sample.dates[__${itemStat.index}__]}"/>
+                    <span th:text="${day}"/>
+
+                </li>
+            </ul>
+
+        </td>
+    </tr>
+
+    </tbody>
+</table>
+
+<h1> Historical results</h1>
+<H3>MAX TEMPERATURE</H3>
+<span th:text="${historicalMax}">MAX</span>
+<H3>MIN TEMPERATURE</H3>
+<span th:text="${historicalMin}">MIN</span>
+<H3>AVERAGE TEMPERATURE </H3>
+<span th:text="${historicalAvg}"/>
+
+
+</body>
+</html>
